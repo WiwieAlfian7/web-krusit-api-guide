@@ -4,114 +4,104 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Krusit API — Dokumentasi Penggunaan</title>
-  <meta name="description" content="Dokumentasi penggunaan API Krusit: endpoint, headers, request body, response, contoh cURL, dan unduh Postman Collection." />
+  <meta name="description" content="Dokumentasi penggunaan API Krusit: per-method lengkap dengan URL bisa dicopy, body bisa dicopy, contoh respons, dan tombol download JSON Postman (Drive)." />
   <style>
     :root{
-      --bg:#0b1020; --panel:#0f172a; --muted:#94a3b8; --text:#e2e8f0; --brand:#f59e0b; --brand-2:#22d3ee;
-      --border:#223257; --code:#0a0f1a; --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444; --info:#60a5fa
+      --bg:#fffefb; --ink:#0f172a; --muted:#5b657a; --brand:#f59e0b; --acc:#22c4cf; --line:#e9edf5;
+      --panel:#fffaf0; --panel2:#f7fbff; --code:#0f172a; --codebg:#f7f8fc; --good:#16a34a; --warn:#d97706; --bad:#b91c1c;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial}
-    body{background:radial-gradient(1200px 600px at 20% -10%, rgba(34,211,238,.15), transparent 60%),
-                     radial-gradient(900px 500px at 110% 10%, rgba(245,158,11,.12), transparent 60%),
-                     linear-gradient(180deg, #0b1020, #0a0f1a 40% 60%, #080c17);
-         color:var(--text)}
-    .wrap{max-width:1120px;margin:0 auto;padding:28px}
-    header{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:20px}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo-badge{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;font-weight:800;color:#0b1020}
-    .title{line-height:1;margin:0;font-size:clamp(20px,3vw,28px)}
+    html,body{margin:0;height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial;background:var(--bg);color:var(--ink)}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px}
+    header{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .logo{display:flex;gap:12px;align-items:center}
+    .badge{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--acc));display:grid;place-items:center;font-weight:800;color:white;box-shadow:0 6px 18px rgba(245,158,11,.25)}
+    h1{margin:0;font-size:clamp(22px,3.5vw,32px)}
     .muted{color:var(--muted)}
-    .panel{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));border:1px solid var(--border);border-radius:16px;padding:18px}
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin:12px 0 28px}
-    @media(max-width:900px){.hero{grid-template-columns:1fr}}
-    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-    .btn{appearance:none;border:1px solid var(--border);background:#0c1424;color:var(--text);padding:10px 14px;border-radius:12px;font-weight:600;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
-    .btn:hover{border-color:#31436f}
-    .btn.brand{background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(34,211,238,.18));border-color:#31436f}
-    .chip{border:1px dashed var(--border);padding:8px 10px;border-radius:999px;color:var(--muted);text-decoration:none}
-    h2{margin:22px 0 10px}
-    h3{margin:18px 0 8px}
-    code, pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    pre{background:var(--code);border:1px solid var(--border);border-radius:12px;padding:14px;overflow:auto;white-space:pre}
-    .endpoint{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.02)}
-    .badge{font-size:12px;padding:3px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
-    .get{color:#22c55e}
-    .post{color:#60a5fa}
-    .put{color:#f59e0b}
-    .del{color:#ef4444}
-    .copy{cursor:pointer;border:1px solid var(--border);background:#0c1424;border-radius:10px;padding:6px 10px}
-    .grid{display:grid;gap:16px}
-    .grid.cols-2{grid-template-columns:1fr 1fr}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    @media(max-width:900px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
+    .btn{appearance:none;border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:12px;font-weight:600;text-decoration:none;color:var(--ink);display:inline-flex;gap:10px;align-items:center;box-shadow:0 1px 0 #fff inset,0 1px 0 rgba(16,24,40,.04)}
+    .btn:hover{border-color:#d9dfec;background:#ffffff}
+    .btn.brand{background:linear-gradient(135deg,#fff7e6,#f0fbff);border-color:#f4e7c7}
+    .panel{background:linear-gradient(180deg,#fff,#fffcf5 60%);border:1px solid var(--line);border-radius:16px;padding:18px}
+    .panel.alt{background:linear-gradient(180deg,#fff,#f7fbff 60%)}
+    .toc{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{border:1px dashed var(--line);padding:8px 10px;border-radius:999px;text-decoration:none;color:var(--muted)}
+    h2{margin:18px 0 8px}
+    h3{margin:16px 0 8px}
+    .endpoint{border:1px dashed var(--line);border-radius:12px;padding:12px;display:grid;gap:10px}
+    .row{display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:center}
+    @media(max-width:800px){.row{grid-template-columns:1fr}}
+    .urlbox{display:flex;gap:8px;align-items:center}
+    input.snug{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+    pre{margin:0;background:var(--codebg);border:1px solid var(--line);border-radius:12px;padding:12px;overflow:auto}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:.95rem;color:var(--code)}
+    .copy{cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px}
+    .method{font-weight:800;padding:2px 10px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+    .GET{color:var(--good)} .POST{color:#2563eb} .PUT{color:#d97706} .DELETE{color:var(--bad)}
+    .note{background:#fff; border-left:4px solid var(--brand);padding:10px 12px;border-radius:8px;border:1px solid var(--line)}
     footer{margin:30px 0;color:var(--muted);font-size:14px}
-    .note{background:rgba(34,211,238,.08);border:1px dashed #315a64;padding:12px;border-radius:12px}
-    .warn{background:rgba(239,68,68,.07);border:1px dashed #5c2c2c}
-    table{width:100%;border-collapse:collapse}
-    th,td{border-bottom:1px dashed var(--border);padding:8px 10px;text-align:left;vertical-align:top}
-    th{color:var(--muted)}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <div class="logo">
-        <div class="logo-badge">K</div>
+        <div class="badge">K</div>
         <div>
-          <h1 class="title">Krusit API — Dokumentasi Penggunaan</h1>
-          <div class="muted">Base URL: <code id="base">https://krusit.up.railway.app</code></div>
+          <h1>Krusit API — Dokumentasi Penggunaan</h1>
+          <div class="muted">Base URL: <b>https://krusit.up.railway.app</b></div>
         </div>
       </div>
-      <a class="btn brand" id="btnDownload" href="#" target="_blank">⬇️ Download Postman Collection</a>
+      <a class="btn brand" id="btnDownload" href="https://drive.google.com/drive/folders/1rgN4Qzp5NYcKVfWEGtLm98ynZMpQLoLU?usp=sharing" target="_blank">⬇️ Download JSON (Postman)</a>
     </header>
 
-    <section class="hero">
-      <div class="panel">
-        <h2>Quickstart</h2>
-        <ol>
-          <li>Pastikan <b>Base URL</b> benar: <code>https://krusit.up.railway.app</code>.</li>
-          <li>Kirim request dengan header:
-            <pre><code>Accept: application/json
-Content-Type: application/json</code></pre>
-          </li>
-          <li>Import koleksi Postman via tombol <b>Download Postman Collection</b> di kanan atas.</li>
-        </ol>
-        <div class="cta">
-          <button class="btn" id="copyBase">📋 Copy Base URL</button>
-          <a class="btn" id="btnImportPostman" href="#">🧰 Import ke Postman</a>
-        </div>
-      </div>
-      <div class="panel">
-        <h2>Daftar Isi</h2>
-        <div class="cta">
-          <a class="chip" href="#login">Login</a>
-          <a class="chip" href="#makanan">Makanan</a>
-          <a class="chip" href="#minuman">Minuman</a>
-          <a class="chip" href="#errors">Kode Status & Error</a>
-          <a class="chip" href="#curl">Contoh cURL</a>
-        </div>
+    <section class="panel">
+      <h2>Quickstart</h2>
+      <ol>
+        <li>Semua request gunakan header: <code>Accept: application/json</code> dan <code>Content-Type: application/json</code>.</li>
+        <li>Gunakan URL lengkap per method di bawah (ada tombol <i>Copy</i> untuk URL & Body).</li>
+        <li>Import koleksi Postman lewat tombol <i>Download JSON</i> jika diperlukan.</li>
+      </ol>
+      <div class="toc">
+        <a class="chip" href="#login">Login</a>
+        <a class="chip" href="#makanan-list">Makanan: List</a>
+        <a class="chip" href="#makanan-create">Makanan: Create</a>
+        <a class="chip" href="#makanan-update">Makanan: Update</a>
+        <a class="chip" href="#makanan-delete">Makanan: Delete</a>
+        <a class="chip" href="#minuman-list">Minuman: List</a>
+        <a class="chip" href="#minuman-create">Minuman: Create</a>
+        <a class="chip" href="#minuman-update">Minuman: Update</a>
+        <a class="chip" href="#minuman-delete">Minuman: Delete</a>
       </div>
     </section>
 
     <!-- LOGIN -->
-    <section id="login" class="panel">
-      <h2>Login</h2>
+    <section id="login" class="panel alt">
+      <h2><span class="method POST">POST</span> Login</h2>
       <div class="endpoint">
-        <div><span class="post">POST</span> <b>/api/login</b></div>
-        <button class="copy" data-copy="POST https://krusit.up.railway.app/api/login">Copy</button>
-      </div>
-      <table>
-        <tr><th>URL</th><td><code>https://krusit.up.railway.app/api/login</code></td></tr>
-        <tr><th>Headers</th><td><code>Accept: application/json</code>, <code>Content-Type: application/json</code></td></tr>
-        <tr><th>Body</th><td>
-<pre><code>{
+        <div class="row">
+          <div>URL (copy)</div>
+          <div class="urlbox">
+            <input class="snug" id="url-login" readonly value="https://krusit.up.railway.app/api/login" />
+            <button class="copy" data-target="#url-login">Copy URL</button>
+          </div>
+        </div>
+        <div class="row">
+          <div>Headers</div>
+          <div><code>Accept: application/json</code>, <code>Content-Type: application/json</code></div>
+        </div>
+        <div class="row">
+          <div>Body (copy)</div>
+          <div>
+            <pre id="body-login"><code>{
   "email": "rezkynurintan13@gmail.com",
   "password": "12345678"
 }</code></pre>
-        </td></tr>
-        <tr><th>Response 200</th><td>
-<pre><code>{
+            <button class="copy" data-target="#body-login">Copy Body</button>
+          </div>
+        </div>
+        <details>
+          <summary>Response 200 (contoh)</summary>
+          <pre><code>{
   "status": "success",
   "user": {
     "id": 1,
@@ -123,342 +113,201 @@ Content-Type: application/json</code></pre>
     "role": "admin"
   }
 }</code></pre>
-        </td></tr>
-      </table>
-      <div class="note">Saat ini response login <b>belum mengembalikan token</b>. Semua endpoint di bawah ini dianggap public sesuai perilaku saat ini.</div>
+        </details>
+        <div class="note">Login saat ini belum mengembalikan token. Endpoint lain diasumsikan public.</div>
+      </div>
     </section>
 
-    <!-- MAKANAN -->
-    <section id="makanan" class="panel">
-      <h2>Resource: Makanan</h2>
-
-      <h3>List Makanan</h3>
+    <!-- MAKANAN LIST -->
+    <section id="makanan-list" class="panel">
+      <h2><span class="method GET">GET</span> List Makanan</h2>
       <div class="endpoint">
-        <div><span class="get">GET</span> <b>/api/makanan</b></div>
-        <button class="copy" data-copy="GET https://krusit.up.railway.app/api/makanan">Copy</button>
-      </div>
-      <table>
-        <tr><th>URL</th><td><code>https://krusit.up.railway.app/api/makanan</code></td></tr>
-        <tr><th>Headers</th><td><code>Accept: application/json</code></td></tr>
-        <tr><th>Response 200</th><td>
-<pre><code>{
+        <div class="row"><div>URL (copy)</div>
+          <div class="urlbox">
+            <input class="snug" id="url-makanan-list" readonly value="https://krusit.up.railway.app/api/makanan" />
+            <button class="copy" data-target="#url-makanan-list">Copy URL</button>
+          </div>
+        </div>
+        <div class="row"><div>Headers</div><div><code>Accept: application/json</code></div></div>
+        <details>
+          <summary>Response 200 (contoh ringkas)</summary>
+          <pre><code>{
   "status": "success",
-  "data": [
-    {
-      "id": 2,
-      "name": "Krupuk Pangsit Goreng",
-      "description": "Pangsit renyah berisi bumbu gurih; garing di luar, juicy di dalam. Pas buat ngemil dengan saus pedas manis",
-      "category": "makanan",
-      "price": "25000.00",
-      "image": "menus/vtVo31JDcW97QEfdi994bma4GqNlC8d2fgkMUq2y.png",
-      "created_at": "2025-10-08T11:08:37.000000Z",
-      "updated_at": "2025-10-08T11:39:09.000000Z"
-    },
-    {
-      "id": 3,
-      "name": "Tahu Walik",
-      "description": "Tahu luar krispi, dalam lembut dan gurih. Makin mantap dicocol sambal kecap/cabe.",
-      "category": "makanan",
-      "price": "25000.00",
-      "image": "menus/6gnlN2Z10jXKvh2I7E6qcQtaCKzrQafeMOFRsDRQ.png",
-      "created_at": "2025-10-08T11:10:42.000000Z",
-      "updated_at": "2025-10-08T11:21:26.000000Z"
-    },
-    {
-      "id": 4,
-      "name": "Bakso Goreng",
-      "description": "Bakso goreng khas kaki lima: kulit garing, dalamnya kenyal-juicy, aromanya harum menggoda",
-      "category": "makanan",
-      "price": "25000.00",
-      "image": "menus/f50Sndk4JhlFHEc3HXr7qnWkkTZ3EHvp70pDRjS7.png",
-      "created_at": "2025-10-08T11:11:36.000000Z",
-      "updated_at": "2025-10-08T11:21:36.000000Z"
-    },
-    {
-      "id": 5,
-      "name": "Cireng Crispy",
-      "description": "Cireng kenyal dengan lapisan luar renyah; nikmat dengan bumbu rujak pedas-manis",
-      "category": "makanan",
-      "price": "15000.00",
-      "image": "menus/dm8vhsg7NVwTHXBuF5wLgz52PhRP4jfKNpol9Afw.png",
-      "created_at": "2025-10-08T11:13:08.000000Z",
-      "updated_at": "2025-10-08T11:21:45.000000Z"
-    }
-  ]
+  "data": [ {"id":2,"name":"Krupuk Pangsit Goreng",...}, {"id":3,...} ]
 }</code></pre>
-        </td></tr>
-      </table>
-
-      <h3>Buat Makanan</h3>
-      <div class="endpoint">
-        <div><span class="post">POST</span> <b>/api/makanan/</b></div>
-        <button class="copy" data-copy="POST https://krusit.up.railway.app/api/makanan/">Copy</button>
+        </details>
       </div>
-      <table>
-        <tr><th>Headers</th><td><code>Accept: application/json</code>, <code>Content-Type: application/json</code></td></tr>
-        <tr><th>Body</th><td>
-<pre><code>{
+    </section>
+
+    <!-- MAKANAN CREATE -->
+    <section id="makanan-create" class="panel alt">
+      <h2><span class="method POST">POST</span> Buat Makanan</h2>
+      <div class="endpoint">
+        <div class="row">
+          <div>URL (copy)</div>
+          <div class="urlbox">
+            <input class="snug" id="url-makanan-create" readonly value="https://krusit.up.railway.app/api/makanan/" />
+            <button class="copy" data-target="#url-makanan-create">Copy URL</button>
+          </div>
+        </div>
+        <div class="row"><div>Headers</div><div><code>Accept: application/json</code>, <code>Content-Type: application/json</code></div></div>
+        <div class="row">
+          <div>Body (copy)</div>
+          <div>
+            <pre id="body-makanan-create"><code>{
   "name": "Gohyong",
   "description": "Gohyong disajikan dengan saus asam manis",
   "category": "makanan",
   "price": 10000
 }</code></pre>
-        </td></tr>
-        <tr><th>Response 201/200</th><td>
-<pre><code>{
-  "status": "success",
-  "data": {
-    "name": "Gohyong",
-    "description": "Gohyong disajikan dengan saus asam manis",
-    "category": "makanan",
-    "price": 10000,
-    "updated_at": "2025-10-08T13:12:28.000000Z",
-    "created_at": "2025-10-08T13:12:28.000000Z",
-    "id": 9
-  }
-}</code></pre>
-        </td></tr>
-      </table>
-
-      <h3>Ubah Makanan</h3>
-      <div class="endpoint">
-        <div><span class="put">PUT</span> <b>/api/makanan/{id}</b></div>
-        <button class="copy" data-copy="PUT https://krusit.up.railway.app/api/makanan/2">Copy</button>
+            <button class="copy" data-target="#body-makanan-create">Copy Body</button>
+          </div>
+        </div>
+        <details>
+          <summary>Response 201/200 (contoh)</summary>
+          <pre><code>{ "status":"success", "data": {"id":9, "name":"Gohyong", ...} }</code></pre>
+        </details>
       </div>
-      <table>
-        <tr><th>Contoh URL</th><td><code>/api/makanan/2</code></td></tr>
-        <tr><th>Body</th><td>
-<pre><code>{
+    </section>
+
+    <!-- MAKANAN UPDATE -->
+    <section id="makanan-update" class="panel">
+      <h2><span class="method PUT">PUT</span> Ubah Makanan</h2>
+      <div class="endpoint">
+        <div class="row"><div>URL (copy)</div>
+          <div class="urlbox">
+            <input class="snug" id="url-makanan-update" readonly value="https://krusit.up.railway.app/api/makanan/2" />
+            <button class="copy" data-target="#url-makanan-update">Copy URL</button>
+          </div>
+        </div>
+        <div class="row"><div>Body (copy)</div>
+          <div>
+            <pre id="body-makanan-update"><code>{
   "name": "Pangsit Goreng",
   "description": "Pangsit renyah berisi bumbu gurih; garing di luar, juicy di dalam. Pas buat ngemil dengan saus pedas manis",
   "category": "makanan",
   "price": "30000"
 }</code></pre>
-        </td></tr>
-        <tr><th>Response 200</th><td>
-<pre><code>{
-  "status": "success",
-  "data": {
-    "id": 2,
-    "name": "Pangsit Goreng",
-    "description": "Pangsit renyah berisi bumbu gurih; garing di luar, juicy di dalam. Pas buat ngemil dengan saus pedas manis",
-    "category": "makanan",
-    "price": "30000",
-    "image": "menus/vtVo31JDcW97QEfdi994bma4GqNlC8d2fgkMUq2y.png",
-    "created_at": "2025-10-08T11:08:37.000000Z",
-    "updated_at": "2025-10-08T13:15:48.000000Z"
-  }
-}</code></pre>
-        </td></tr>
-      </table>
-
-      <h3>Hapus Makanan</h3>
-      <div class="endpoint">
-        <div><span class="del">DELETE</span> <b>/api/makanan/{id}</b></div>
-        <button class="copy" data-copy="DELETE https://krusit.up.railway.app/api/makanan/10">Copy</button>
+            <button class="copy" data-target="#body-makanan-update">Copy Body</button>
+          </div>
+        </div>
+        <details>
+          <summary>Response 200 (contoh)</summary>
+          <pre><code>{ "status":"success", "data": {"id":2, "name":"Pangsit Goreng", "price":"30000", ...} }</code></pre>
+        </details>
       </div>
-      <table>
-        <tr><th>Contoh URL</th><td><code>/api/makanan/10</code></td></tr>
-        <tr><th>Response 200</th><td>
-<pre><code>{
-  "status": "success",
-  "message": "Barang berhasil dihapus"
-}</code></pre>
-        </td></tr>
-      </table>
     </section>
 
-    <!-- MINUMAN -->
-    <section id="minuman" class="panel">
-      <h2>Resource: Minuman</h2>
-
-      <h3>List Minuman</h3>
+    <!-- MAKANAN DELETE -->
+    <section id="makanan-delete" class="panel alt">
+      <h2><span class="method DELETE">DELETE</span> Hapus Makanan</h2>
       <div class="endpoint">
-        <div><span class="get">GET</span> <b>/api/minuman</b></div>
-        <button class="copy" data-copy="GET https://krusit.up.railway.app/api/minuman">Copy</button>
+        <div class="row"><div>URL (copy)</div>
+          <div class="urlbox">
+            <input class="snug" id="url-makanan-delete" readonly value="https://krusit.up.railway.app/api/makanan/10" />
+            <button class="copy" data-target="#url-makanan-delete">Copy URL</button>
+          </div>
+        </div>
+        <details>
+          <summary>Response 200 (contoh)</summary>
+          <pre><code>{ "status":"success", "message":"Barang berhasil dihapus" }</code></pre>
+        </details>
       </div>
-      <table>
-        <tr><th>URL</th><td><code>https://krusit.up.railway.app/api/minuman</code></td></tr>
-        <tr><th>Headers</th><td><code>Accept: application/json</code></td></tr>
-        <tr><th>Response 200</th><td>
-<pre><code>{
-  "status": "success",
-  "data": [
-    {
-      "id": 6,
-      "name": "Es Teh Manis",
-      "description": "Teh hitam harum disajikan dingin dengan es batu; manis-segar, jadi pelepas dahaga yang aman di semua suasana",
-      "category": "minuman",
-      "price": "10000.00",
-      "image": "menus/SzlLX10otX7cRH2G0idSeidtjeYzM8WAelBEmEwS.png",
-      "created_at": "2025-10-08T11:18:04.000000Z",
-      "updated_at": "2025-10-08T11:38:40.000000Z"
-    },
-    {
-      "id": 7,
-      "name": "Air Mineral",
-      "description": "Air minum murni yang menyegarkan, pas untuk netralin rasa dan temani semua camilanmu",
-      "category": "minuman",
-      "price": "7000.00",
-      "image": "menus/4LIJreg1xIa5agJGPky3v0gbPSUGFO574uV79nSm.png",
-      "created_at": "2025-10-08T11:19:58.000000Z",
-      "updated_at": "2025-10-08T11:19:58.000000Z"
-    }
-  ]
+    </section>
+
+    <!-- MINUMAN LIST -->
+    <section id="minuman-list" class="panel">
+      <h2><span class="method GET">GET</span> List Minuman</h2>
+      <div class="endpoint">
+        <div class="row"><div>URL (copy)</div>
+          <div class="urlbox">
+            <input class="snug" id="url-minuman-list" readonly value="https://krusit.up.railway.app/api/minuman" />
+            <button class="copy" data-target="#url-minuman-list">Copy URL</button>
+          </div>
+        </div>
+        <div class="row"><div>Headers</div><div><code>Accept: application/json</code></div></div>
+        <details>
+          <summary>Response 200 (contoh ringkas)</summary>
+          <pre><code>{
+  "status":"success",
+  "data":[ {"id":6,"name":"Es Teh Manis",...}, {"id":7,"name":"Air Mineral",...} ]
 }</code></pre>
-        </td></tr>
-      </table>
-
-      <h3>Buat Minuman (implementasi saat ini)</h3>
-      <div class="endpoint">
-        <div><span class="post">POST</span> <b>/api/minuman/6</b></div>
-        <button class="copy" data-copy="POST https://krusit.up.railway.app/api/minuman/6">Copy</button>
+        </details>
       </div>
-      <table>
-        <tr><th>Headers</th><td><code>Accept: application/json</code>, <code>Content-Type: application/json</code></td></tr>
-        <tr><th>Body</th><td>
-<pre><code>{
+    </section>
+
+    <!-- MINUMAN CREATE (current impl) -->
+    <section id="minuman-create" class="panel alt">
+      <h2><span class="method POST">POST</span> Buat Minuman (implementasi saat ini)</h2>
+      <div class="endpoint">
+        <div class="row"><div>URL (copy)</div>
+          <div class="urlbox">
+            <input class="snug" id="url-minuman-create" readonly value="https://krusit.up.railway.app/api/minuman/6" />
+            <button class="copy" data-target="#url-minuman-create">Copy URL</button>
+          </div>
+        </div>
+        <div class="row"><div>Headers</div><div><code>Accept: application/json</code>, <code>Content-Type: application/json</code></div></div>
+        <div class="row"><div>Body (copy)</div>
+          <div>
+            <pre id="body-minuman-create"><code>{
   "name": "Kopi Latte",
   "description": "Campuran espresso dengan susu steamed dengan lapisan foam susu",
   "category": "minuman",
   "price": 10000
 }</code></pre>
-        </td></tr>
-        <tr><th>Response 201/200</th><td>
-<pre><code>{
-  "status": "success",
-  "data": {
-    "name": "Kopi Latte",
-    "description": "Campuran espresso dengan susu steamed dengan lapisan foam susu",
-    "category": "minuman",
-    "price": 10000,
-    "updated_at": "2025-10-08T13:14:23.000000Z",
-    "created_at": "2025-10-08T13:14:23.000000Z",
-    "id": 10
-  }
-}</code></pre>
-        </td></tr>
-      </table>
-
-      <h3>Ubah Minuman</h3>
-      <div class="endpoint">
-        <div><span class="put">PUT</span> <b>/api/minuman/{id}</b></div>
-        <button class="copy" data-copy="PUT https://krusit.up.railway.app/api/minuman/6">Copy</button>
+            <button class="copy" data-target="#body-minuman-create">Copy Body</button>
+          </div>
+        </div>
+        <details>
+          <summary>Response 201/200 (contoh)</summary>
+          <pre><code>{ "status":"success", "data": {"id":10, "name":"Kopi Latte", ...} }</code></pre>
+        </details>
       </div>
-      <table>
-        <tr><th>Contoh URL</th><td><code>/api/minuman/6</code></td></tr>
-        <tr><th>Body</th><td>
-<pre><code>{
+    </section>
+
+    <!-- MINUMAN UPDATE -->
+    <section id="minuman-update" class="panel">
+      <h2><span class="method PUT">PUT</span> Ubah Minuman</h2>
+      <div class="endpoint">
+        <div class="row"><div>URL (copy)</div>
+          <div class="urlbox">
+            <input class="snug" id="url-minuman-update" readonly value="https://krusit.up.railway.app/api/minuman/6" />
+            <button class="copy" data-target="#url-minuman-update">Copy URL</button>
+          </div>
+        </div>
+        <div class="row"><div>Body (copy)</div>
+          <div>
+            <pre id="body-minuman-update"><code>{
   "name": "Es Teh",
   "description": "Teh hitam harum disajikan dingin dengan es batu; manis-segar, jadi pelepas dahaga yang aman di semua suasana",
   "category": "minuman",
   "price": "20000"
 }</code></pre>
-        </td></tr>
-        <tr><th>Response 200</th><td>
-<pre><code>{
-  "status": "success",
-  "data": {
-    "id": 6,
-    "name": "Es Teh",
-    "description": "Teh hitam harum disajikan dingin dengan es batu; manis-segar, jadi pelepas dahaga yang aman di semua suasana",
-    "category": "minuman",
-    "price": "20000",
-    "image": "menus/SzlLX10otX7cRH2G0idSeidtjeYzM8WAelBEmEwS.png",
-    "created_at": "2025-10-08T11:18:04.000000Z",
-    "updated_at": "2025-10-08T13:19:10.000000Z"
-  }
-}</code></pre>
-        </td></tr>
-      </table>
-
-      <h3>Hapus Minuman</h3>
-      <div class="endpoint">
-        <div><span class="del">DELETE</span> <b>/api/minuman/{id}</b></div>
-        <button class="copy" data-copy="DELETE https://krusit.up.railway.app/api/minuman/12">Copy</button>
+            <button class="copy" data-target="#body-minuman-update">Copy Body</button>
+          </div>
+        </div>
+        <details>
+          <summary>Response 200 (contoh)</summary>
+          <pre><code>{ "status":"success", "data": {"id":6, "name":"Es Teh", "price":"20000", ...} }</code></pre>
+        </details>
       </div>
-      <table>
-        <tr><th>Contoh URL</th><td><code>/api/minuman/12</code></td></tr>
-        <tr><th>Response 200</th><td>
-<pre><code>{
-  "status": "success",
-  "message": "Barang berhasil dihapus"
-}</code></pre>
-        </td></tr>
-      </table>
     </section>
 
-    <!-- STATUS & ERROR -->
-    <section id="errors" class="panel">
-      <h2>Kode Status & Pola Error</h2>
-      <table>
-        <tr><th>200 OK</th><td>Permintaan berhasil, response seperti contoh di atas.</td></tr>
-        <tr><th>201 Created</th><td>Berhasil membuat resource (tergantung implementasi, bisa juga 200).</td></tr>
-        <tr><th>400 / 422</th><td>Validasi gagal / Bad Request. Biasanya bentuk: <code>{ "status": false, "message": "...", "errors": { field:["msg"] } }</code></td></tr>
-        <tr><th>404 Not Found</th><td>Resource tidak ditemukan.</td></tr>
-        <tr><th>500 Server Error</th><td>Kesalahan di sisi server.</td></tr>
-      </table>
-    </section>
-
-    <!-- CURL EXAMPLES -->
-    <section id="curl" class="panel">
-      <h2>Contoh cURL</h2>
-      <h3>Login</h3>
-      <pre><code>curl -X POST "https://krusit.up.railway.app/api/login" \
-  -H "Accept: application/json" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "rezkynurintan13@gmail.com",
-    "password": "12345678"
-  }'</code></pre>
-
-      <h3>GET Makanan</h3>
-      <pre><code>curl -X GET "https://krusit.up.railway.app/api/makanan" \
-  -H "Accept: application/json"</code></pre>
-
-      <h3>POST Makanan</h3>
-      <pre><code>curl -X POST "https://krusit.up.railway.app/api/makanan/" \
-  -H "Accept: application/json" -H "Content-Type: application/json" \
-  -d '{
-    "name":"Gohyong",
-    "description":"Gohyong disajikan dengan saus asam manis",
-    "category":"makanan",
-    "price":10000
-  }'</code></pre>
-
-      <h3>PUT Makanan (id=2)</h3>
-      <pre><code>curl -X PUT "https://krusit.up.railway.app/api/makanan/2" \
-  -H "Accept: application/json" -H "Content-Type: application/json" \
-  -d '{
-    "name":"Pangsit Goreng",
-    "description":"Pangsit renyah berisi bumbu gurih; garing di luar, juicy di dalam. Pas buat ngemil dengan saus pedas manis",
-    "category":"makanan",
-    "price":"30000"
-  }'</code></pre>
-
-      <h3>POST Minuman (implementasi saat ini)</h3>
-      <pre><code>curl -X POST "https://krusit.up.railway.app/api/minuman/6" \
-  -H "Accept: application/json" -H "Content-Type: application/json" \
-  -d '{
-    "name":"Kopi Latte",
-    "description":"Campuran espresso dengan susu steamed dengan lapisan foam susu",
-    "category":"minuman",
-    "price":10000
-  }'</code></pre>
-
-      <h3>PUT Minuman (id=6)</h3>
-      <pre><code>curl -X PUT "https://krusit.up.railway.app/api/minuman/6" \
-  -H "Accept: application/json" -H "Content-Type: application/json" \
-  -d '{
-    "name":"Es Teh",
-    "description":"Teh hitam harum disajikan dingin dengan es batu; manis-segar, jadi pelepas dahaga yang aman di semua suasana",
-    "category":"minuman",
-    "price":"20000"
-  }'</code></pre>
-
-      <h3>DELETE Minuman (id=12)</h3>
-      <pre><code>curl -X DELETE "https://krusit.up.railway.app/api/minuman/12" \
-  -H "Accept: application/json"</code></pre>
+    <!-- MINUMAN DELETE -->
+    <section id="minuman-delete" class="panel alt">
+      <h2><span class="method DELETE">DELETE</span> Hapus Minuman</h2>
+      <div class="endpoint">
+        <div class="row"><div>URL (copy)</div>
+          <div class="urlbox">
+            <input class="snug" id="url-minuman-delete" readonly value="https://krusit.up.railway.app/api/minuman/12" />
+            <button class="copy" data-target="#url-minuman-delete">Copy URL</button>
+          </div>
+        </div>
+        <details>
+          <summary>Response 200 (contoh)</summary>
+          <pre><code>{ "status":"success", "message":"Barang berhasil dihapus" }</code></pre>
+        </details>
+      </div>
     </section>
 
     <footer>
@@ -467,34 +316,21 @@ Content-Type: application/json</code></pre>
   </div>
 
   <script>
-    // ====== KONFIGURASI ======
-    const BASE = 'https://krusit.up.railway.app';
-    // Ganti URL di bawah dengan link Drive Anda jika sudah ada file koleksi JSON.
-    // Sesuai permintaan: cukup tombol mengarah ke Drive (tanpa penjelasan tambahan).
-    const COLLECTION_URL = 'https://drive.google.com/drive/folders/1rgN4Qzp5NYcKVfWEGtLm98ynZMpQLoLU?usp=sharing';
-
-    // ====== UI Actions ======
-    document.getElementById('btnDownload').href = COLLECTION_URL;
-    document.getElementById('btnDownload').setAttribute('rel','noopener');
-
-    document.getElementById('copyBase').addEventListener('click', async () => {
-      try{ await navigator.clipboard.writeText(BASE); alert('Base URL tersalin: ' + BASE);}catch(e){ console.log(e) }
-    });
-
-    function postmanImportUrl(url){
-      return 'postman://app/import?externalImport=true&url=' + encodeURIComponent(url);
+    // Copy util
+    function copySel(sel){
+      const el = document.querySelector(sel);
+      if(!el) return;
+      let text = '';
+      if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') text = el.value;
+      else text = el.innerText;
+      navigator.clipboard.writeText(text).then(()=>{
+        const b = document.querySelector(`[data-target="${sel}"]`);
+        if(b){ const old=b.textContent; b.textContent='Copied!'; setTimeout(()=>b.textContent=old,1200); }
+      });
     }
-    // Import Postman: arahkan ke COLLECTION_URL (biarkan Postman handle jika URL adalah file langsung)
-    document.getElementById('btnImportPostman').href = postmanImportUrl(COLLECTION_URL);
-
-    // Copy label endpoint
-    document.querySelectorAll('.copy').forEach(btn => {
-      btn.addEventListener('click', async ()=>{
-        const text = btn.getAttribute('data-copy');
-        try{ await navigator.clipboard.writeText(text); btn.textContent = 'Copied!'; setTimeout(()=>btn.textContent='Copy',1200);}catch(e){}
-      })
+    document.querySelectorAll('.copy').forEach(btn=>{
+      btn.addEventListener('click',()=>copySel(btn.getAttribute('data-target')))
     });
-
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
