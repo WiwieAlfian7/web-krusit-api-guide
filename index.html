@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Krusit API — Dokumentasi</title>
-  <meta name="description" content="Dokumentasi cara penggunaan API Krusit: endpoint, contoh request/response, autentikasi, dan download Postman collection." />
+  <title>Krusit API — Dokumentasi Resmi</title>
+  <meta name="description" content="Dokumentasi cara penggunaan API Krusit: endpoint, contoh request/response, autentikasi, dan tombol download Postman Collection (Drive/GitHub)." />
   <style>
     :root{
       --bg:#0b1020; --panel:#0f172a; --muted:#94a3b8; --text:#e2e8f0; --brand:#f59e0b; --brand-2:#22d3ee;
-      --card:#0b1220; --border:#1f2a44; --good:#22c55e; --bad:#ef4444; --code:#0a0f1a
+      --border:#223257; --code:#0a0f1a; --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444; --info:#60a5fa
     }
     *{box-sizing:border-box}
     html,body{margin:0;height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial}
@@ -16,10 +16,10 @@
                      radial-gradient(900px 500px at 110% 10%, rgba(245,158,11,.12), transparent 60%),
                      linear-gradient(180deg, #0b1020, #0a0f1a 40% 60%, #080c17);
          color:var(--text)}
-    .wrap{max-width:1100px;margin:0 auto;padding:32px}
+    .wrap{max-width:1120px;margin:0 auto;padding:28px}
     header{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:20px}
     .logo{display:flex;align-items:center;gap:12px}
-    .logo-badge{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;font-weight:800;color:#0b1020}
+    .logo-badge{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;font-weight:800;color:#0b1020}
     .title{line-height:1;margin:0;font-size:clamp(20px,3vw,28px)}
     .muted{color:var(--muted)}
     .panel{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));border:1px solid var(--border);border-radius:16px;padding:18px}
@@ -28,26 +28,28 @@
     .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
     .btn{appearance:none;border:1px solid var(--border);background:#0c1424;color:var(--text);padding:10px 14px;border-radius:12px;font-weight:600;text-decoration:none;display:inline-flex;gap:8px;align-items:center}
     .btn:hover{border-color:#31436f}
-    .btn.brand{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(34,211,238,.15));border-color:#31436f}
-    .grid{display:grid;gap:16px}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    @media(max-width:900px){.grid.cols-3{grid-template-columns:1fr}}
-    .toc{display:flex;flex-wrap:wrap;gap:8px}
+    .btn.brand{background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(34,211,238,.18));border-color:#31436f}
     .chip{border:1px dashed var(--border);padding:8px 10px;border-radius:999px;color:var(--muted);text-decoration:none}
     h2{margin:22px 0 10px}
     h3{margin:18px 0 8px}
     code, pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-    pre{background:var(--code);border:1px solid var(--border);border-radius:12px;padding:14px;overflow:auto}
-    .kvs{display:grid;grid-template-columns:180px 1fr;gap:10px}
-    .kvs div{padding:8px 10px;border-bottom:1px dashed var(--border)}
-    .badge{font-size:12px;padding:3px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
-    .get{color:var(--good)} .post{color:#60a5fa} .put{color:#f59e0b} .del{color:var(--bad)}
+    pre{background:var(--code);border:1px solid var(--border);border-radius:12px;padding:14px;overflow:auto;white-space:pre}
     .endpoint{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.02)}
-    .endpoint b{font-family:ui-monospace}
+    .badge{font-size:12px;padding:3px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+    .get{color:#22c55e}
+    .post{color:#60a5fa}
+    .put{color:#f59e0b}
+    .del{color:#ef4444}
     .copy{cursor:pointer;border:1px solid var(--border);background:#0c1424;border-radius:10px;padding:6px 10px}
+    .grid{display:grid;gap:16px}
+    .grid.cols-2{grid-template-columns:1fr 1fr}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media(max-width:900px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
     footer{margin:30px 0;color:var(--muted);font-size:14px}
-    .note{background:rgba(34,211,238,.07);border:1px dashed #2b4a55;padding:12px;border-radius:12px}
+    .note{background:rgba(34,211,238,.08);border:1px dashed #315a64;padding:12px;border-radius:12px}
     .warn{background:rgba(239,68,68,.07);border:1px dashed #5c2c2c}
+    details{border:1px dashed var(--border);border-radius:12px;padding:10px 12px}
+    details summary{cursor:pointer}
   </style>
 </head>
 <body>
@@ -56,213 +58,324 @@
       <div class="logo">
         <div class="logo-badge">K</div>
         <div>
-          <h1 class="title">Krusit API — Dokumentasi</h1>
-          <div class="muted">Panduan cepat untuk integrasi & pengujian</div>
+          <h1 class="title">Krusit API — Dokumentasi Resmi</h1>
+          <div class="muted">Base URL: <code id="base">https://krusit.up.railway.app</code></div>
         </div>
       </div>
-      <a class="btn" href="#download" title="Loncat ke bagian download">Download</a>
+      <a class="btn" href="#download">⬇️ Download Collection</a>
     </header>
 
     <section class="hero">
       <div class="panel">
-        <h2>Ringkas</h2>
-        <div class="kvs">
-          <div><b>Base URL</b></div><div><code id="baseUrl">http://localhost:8000</code> <span class="badge">ubah saat deploy</span></div>
-          <div><b>Auth</b></div><div><code>Bearer Token</code> (Sanctum/JWT sesuai setup Anda)</div>
-          <div><b>Format</b></div><div><code>JSON</code></div>
-          <div><b>Versi</b></div><div><code>v1</code> (contoh), namespace: <code>/api</code></div>
+        <h2>Ringkasan</h2>
+        <div class="grid cols-2">
+          <div>
+            <b>Format</b><br><code>JSON</code>
+          </div>
+          <div>
+            <b>Namespace</b><br><code>/api</code>
+          </div>
+          <div>
+            <b>Autentikasi</b><br><span class="badge">Public endpoints</span> (contoh login belum mengembalikan token)
+          </div>
+          <div>
+            <b>Environment</b><br><code>base_url</code> = <code>https://krusit.up.railway.app</code>
+          </div>
         </div>
         <div class="cta">
-          <a class="btn brand" id="dlBtn" href="krusit.postman_collection.json" download>
-            ⬇️ Download Postman Collection
-          </a>
-          <a class="btn" id="openPostman" href="#" title="Buka langsung di Postman (desktop)">🧰 Import ke Postman</a>
           <button class="btn" id="copyBase">📋 Copy Base URL</button>
+          <a class="btn brand" id="btnImportPostman" href="#">🧰 Import ke Postman</a>
         </div>
       </div>
       <div class="panel">
         <h2>Daftar Isi</h2>
-        <div class="toc">
-          <a class="chip" href="#getting-started">Getting Started</a>
-          <a class="chip" href="#auth">Autentikasi</a>
-          <a class="chip" href="#endpoints">Endpoint</a>
-          <a class="chip" href="#examples">Contoh Request</a>
-          <a class="chip" href="#errors">Kode Error</a>
+        <div class="cta">
+          <a class="chip" href="#auth">Login</a>
+          <a class="chip" href="#makanan">Makanan</a>
+          <a class="chip" href="#minuman">Minuman</a>
+          <a class="chip" href="#examples">Contoh cURL</a>
           <a class="chip" href="#download">Download Collection</a>
-          <a class="chip" href="#changelog">Changelog</a>
         </div>
       </div>
     </section>
 
-    <section id="getting-started" class="panel">
-      <h2>Getting Started</h2>
-      <ol>
-        <li><b>Set BASE_URL</b>: ganti <code>http://localhost:8000</code> menjadi domain/host produksi Anda (misal: <code>https://api.krusit.xyz</code>).</li>
-        <li><b>Import Collection</b>: klik tombol <i>Download Postman Collection</i> lalu import ke Postman.</li>
-        <li><b>Set Environment</b> di Postman: buat variable <code>base_url</code> dan <code>token</code>.</li>
-      </ol>
-      <div class="note">Hosting GitHub Pages? Simpan berkas <code>krusit.postman_collection.json</code> di root repositori yang sama dengan berkas ini. Link download di atas akan otomatis bekerja.</div>
-    </section>
-
+    <!-- LOGIN -->
     <section id="auth" class="panel">
-      <h2>Autentikasi</h2>
-      <p>API Krusit menggunakan <b>Bearer Token</b>. Login untuk memperoleh token, lalu kirimkan pada header <code>Authorization: Bearer &lt;token&gt;</code>.</p>
-      <div class="endpoint"><div><span class="post">POST</span> <b>/api/auth/login</b></div><button class="copy" data-copy='POST /api/auth/login'>Copy</button></div>
-      <h3>Request (JSON)</h3>
+      <h2>POST /api/login</h2>
+      <div class="endpoint">
+        <div><span class="post">POST</span> <b>https://krusit.up.railway.app/api/login</b></div>
+        <button class="copy" data-copy="POST https://krusit.up.railway.app/api/login">Copy</button>
+      </div>
+      <h3>Request Body</h3>
       <pre><code>{
-  "email": "user@example.com",
-  "password": "secret"
+  "email": "rezkynurintan13@gmail.com",
+  "password": "12345678"
 }</code></pre>
-      <h3>Response Sukses</h3>
+      <h3>Response (contoh aktual)</h3>
       <pre><code>{
-  "status": true,
-  "token": "eyJhbGciOi...",
+  "status": "success",
   "user": {
     "id": 1,
-    "name": "User"
+    "name": "Admin Krusit 1",
+    "email": "rezkynurintan13@gmail.com",
+    "email_verified_at": null,
+    "created_at": "2025-10-08T13:54:43.000000Z",
+    "updated_at": "2025-10-08T13:54:43.000000Z",
+    "role": "admin"
   }
 }</code></pre>
-      <h3>Contoh Header</h3>
-      <pre><code>Authorization: Bearer &lt;TOKEN&gt;
-Accept: application/json
-Content-Type: application/json</code></pre>
+      <div class="note">Catatan: Saat ini response login belum mengembalikan token. Jika nanti menggunakan Sanctum/JWT, tambahkan header <code>Authorization: Bearer &lt;token&gt;</code> pada endpoint yang butuh auth.</div>
     </section>
 
-    <section id="endpoints" class="panel">
-      <h2>Endpoint Utama</h2>
-      <p>Berikut beberapa endpoint dasar. Tambahkan endpoint lain sesuai proyek Anda.</p>
-      <div class="grid cols-3">
+    <!-- MAKANAN -->
+    <section id="makanan" class="panel">
+      <h2>Makanan</h2>
+      <div class="grid cols-2">
         <div class="panel">
-          <div class="endpoint"><div><span class="get">GET</span> <b>/api/ping</b></div><button class="copy" data-copy='GET /api/ping'>Copy</button></div>
-          <p class="muted">Cek kesehatan server.</p>
-          <pre><code>// Response
-{
-  "message": "pong"
+          <div class="endpoint">
+            <div><span class="get">GET</span> <b>/api/makanan</b></div>
+            <button class="copy" data-copy="GET https://krusit.up.railway.app/api/makanan">Copy</button>
+          </div>
+          <pre><code>{
+  "status": "success",
+  "data": [
+    {"id": 2, "name": "Krupuk Pangsit Goreng", "price": "25000.00", ...},
+    {"id": 3, "name": "Tahu Walik", "price": "25000.00", ...},
+    {"id": 4, "name": "Bakso Goreng", "price": "25000.00", ...},
+    {"id": 5, "name": "Cireng Crispy", "price": "15000.00", ...}
+  ]
 }</code></pre>
         </div>
         <div class="panel">
-          <div class="endpoint"><div><span class="get">GET</span> <b>/api/menu</b></div><button class="copy" data-copy='GET /api/menu'>Copy</button></div>
-          <p class="muted">Daftar menu/jajanan (contoh).</p>
-          <pre><code>// Response contoh
-[
-  {"id":1, "name":"Krupuk Pangsit Goreng", "price":25000},
-  {"id":2, "name":"Tahu Goreng", "price":25000}
-]</code></pre>
+          <div class="endpoint">
+            <div><span class="post">POST</span> <b>/api/makanan/</b></div>
+            <button class="copy" data-copy="POST https://krusit.up.railway.app/api/makanan/">Copy</button>
+          </div>
+          <h4>Request Body</h4>
+          <pre><code>{
+  "name": "Gohyong",
+  "description": "Gohyong disajikan dengan saus asam manis",
+  "category": "makanan",
+  "price": 10000,
+  "image": "Gohyong.jpg"
+}</code></pre>
+          <h4>Response</h4>
+          <pre><code>{
+  "status": "success",
+  "data": { "id": 9, "name": "Gohyong", ... }
+}</code></pre>
         </div>
         <div class="panel">
-          <div class="endpoint"><div><span class="post">POST</span> <b>/api/orders</b></div><button class="copy" data-copy='POST /api/orders'>Copy</button></div>
-          <p class="muted">Buat pesanan (contoh).</p>
-          <pre><code>// Request
-{
-  "items": [
-    {"menu_id":1, "qty":2},
-    {"menu_id":2, "qty":1}
-  ],
-  "notes": "tanpa pedas"
-}
-// Response
-{
-  "order_id": 123,
-  "status": "created"
+          <div class="endpoint">
+            <div><span class="put">PUT</span> <b>/api/makanan/2</b></div>
+            <button class="copy" data-copy="PUT https://krusit.up.railway.app/api/makanan/2">Copy</button>
+          </div>
+          <h4>Request Body</h4>
+          <pre><code>{
+  "name": "Pangsit Goreng",
+  "description": "Pangsit renyah berisi bumbu gurih; garing di luar, juicy di dalam. Pas buat ngemil dengan saus pedas manis",
+  "category": "makanan",
+  "price": "30000"
+}</code></pre>
+          <h4>Response</h4>
+          <pre><code>{
+  "status": "success",
+  "data": { "id": 2, "name": "Pangsit Goreng", "price": "30000", ... }
+}</code></pre>
+        </div>
+        <div class="panel">
+          <div class="endpoint">
+            <div><span class="del">DELETE</span> <b>/api/makanan/10</b></div>
+            <button class="copy" data-copy="DELETE https://krusit.up.railway.app/api/makanan/10">Copy</button>
+          </div>
+          <pre><code>{
+  "status": "success",
+  "message": "Barang berhasil dihapus"
 }</code></pre>
         </div>
       </div>
-      <div class="note warn" style="margin-top:12px">Catatan: Jika endpoint Anda berbeda (misalnya <code>/api/minuman</code>, <code>/api/kategori</code>, dll), silakan ganti nama dan contoh payload di sini.</div>
     </section>
 
+    <!-- MINUMAN -->
+    <section id="minuman" class="panel">
+      <h2>Minuman</h2>
+      <div class="grid cols-2">
+        <div class="panel">
+          <div class="endpoint">
+            <div><span class="get">GET</span> <b>/api/minuman</b></div>
+            <button class="copy" data-copy="GET https://krusit.up.railway.app/api/minuman">Copy</button>
+          </div>
+          <pre><code>{
+  "status": "success",
+  "data": [
+    {"id": 6, "name": "Es Teh Manis", "price": "10000.00", ...},
+    {"id": 7, "name": "Air Mineral", "price": "7000.00", ...}
+  ]
+}</code></pre>
+        </div>
+        <div class="panel">
+          <div class="endpoint">
+            <div><span class="post">POST</span> <b>/api/minuman/6</b></div>
+            <button class="copy" data-copy="POST https://krusit.up.railway.app/api/minuman/6">Copy</button>
+          </div>
+          <div class="note">Catatan: Sesuai output Anda, pembuatan data minuman dilakukan via <code>POST /api/minuman/6</code> dan menghasilkan ID baru (contoh: 10). Jika nanti diubah ke <code>POST /api/minuman</code> standar, tinggal sesuaikan label ini.</div>
+          <h4>Request Body</h4>
+          <pre><code>{
+  "name": "Kopi Latte",
+  "description": "Campuran espresso dengan susu steamed dengan lapisan foam susu",
+  "category": "minuman",
+  "price": 10000,
+  "image": "KopiLatte.jpg"
+}</code></pre>
+          <h4>Response</h4>
+          <pre><code>{
+  "status": "success",
+  "data": { "id": 10, "name": "Kopi Latte", ... }
+}</code></pre>
+        </div>
+        <div class="panel">
+          <div class="endpoint">
+            <div><span class="put">PUT</span> <b>/api/minuman/6</b></div>
+            <button class="copy" data-copy="PUT https://krusit.up.railway.app/api/minuman/6">Copy</button>
+          </div>
+          <h4>Request Body</h4>
+          <pre><code>{
+  "name": "Es Teh",
+  "description": "Teh hitam harum disajikan dingin dengan es batu; manis-segar, jadi pelepas dahaga yang aman di semua suasana",
+  "category": "minuman",
+  "price": "20000"
+}</code></pre>
+          <h4>Response</h4>
+          <pre><code>{
+  "status": "success",
+  "data": { "id": 6, "name": "Es Teh", "price": "20000", ... }
+}</code></pre>
+        </div>
+        <div class="panel">
+          <div class="endpoint">
+            <div><span class="del">DELETE</span> <b>/api/minuman/12</b></div>
+            <button class="copy" data-copy="DELETE https://krusit.up.railway.app/api/minuman/12">Copy</button>
+          </div>
+          <pre><code>{
+  "status": "success",
+  "message": "Barang berhasil dihapus"
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTOH CURL -->
     <section id="examples" class="panel">
-      <h2>Contoh Request</h2>
-      <h3>cURL</h3>
-      <pre><code>curl -X GET "${BASE_URL}/api/ping" -H "Accept: application/json"</code></pre>
-      <pre><code>curl -X POST "${BASE_URL}/api/auth/login" \
+      <h2>Contoh cURL</h2>
+      <details open>
+        <summary>Login</summary>
+        <pre><code>curl -X POST "https://krusit.up.railway.app/api/login" \
+  -H "Accept: application/json" \
   -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"secret"}'</code></pre>
-      <h3>JavaScript (fetch)</h3>
-      <pre><code>async function getMenu(){
-  const res = await fetch(`${BASE_URL}/api/menu`, {
-    headers: { Accept: 'application/json' }
-  });
-  return res.json();
-}</code></pre>
-      <h3>Axios</h3>
-      <pre><code>import axios from 'https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js';
-const api = axios.create({ baseURL: BASE_URL, headers:{ Accept:'application/json' }});
-const { data } = await api.get('/api/ping');</code></pre>
+  -d '{
+    "email": "rezkynurintan13@gmail.com",
+    "password": "12345678"
+  }'</code></pre>
+      </details>
+      <details>
+        <summary>GET daftar makanan</summary>
+        <pre><code>curl -X GET "https://krusit.up.railway.app/api/makanan" -H "Accept: application/json"</code></pre>
+      </details>
+      <details>
+        <summary>POST makanan</summary>
+        <pre><code>curl -X POST "https://krusit.up.railway.app/api/makanan/" \
+  -H "Accept: application/json" -H "Content-Type: application/json" \
+  -d '{
+    "name":"Gohyong",
+    "description":"Gohyong disajikan dengan saus asam manis",
+    "category":"makanan",
+    "price":10000,
+    "image":"Gohyong.jpg"
+  }'</code></pre>
+      </details>
+      <details>
+        <summary>PUT minuman (id=6)</summary>
+        <pre><code>curl -X PUT "https://krusit.up.railway.app/api/minuman/6" \
+  -H "Accept: application/json" -H "Content-Type: application/json" \
+  -d '{
+    "name":"Es Teh",
+    "description":"Teh hitam harum disajikan dingin dengan es batu; manis-segar, jadi pelepas dahaga yang aman di semua suasana",
+    "category":"minuman",
+    "price":"20000"
+  }'</code></pre>
+      </details>
     </section>
 
-    <section id="errors" class="panel">
-      <h2>Kode Error & Pola Response</h2>
-      <div class="grid">
-        <div class="panel" style="background:rgba(34,197,94,.04)">
-          <b>200 OK</b><br><span class="muted">Permintaan berhasil.</span>
-        </div>
-        <div class="panel" style="background:rgba(59,130,246,.04)">
-          <b>201 Created</b><br><span class="muted">Resource berhasil dibuat.</span>
-        </div>
-        <div class="panel" style="background:rgba(245,158,11,.04)">
-          <b>400/422</b><br><span class="muted">Validasi gagal / Bad Request.</span>
-        </div>
-        <div class="panel" style="background:rgba(239,68,68,.05)">
-          <b>401/403</b><br><span class="muted">Tidak terautentikasi / tidak berizin.</span>
-        </div>
-        <div class="panel" style="background:rgba(239,68,68,.08)">
-          <b>500</b><br><span class="muted">Kesalahan server.</span>
-        </div>
-      </div>
-      <h3>Contoh Response Error</h3>
-      <pre><code>{
-  "status": false,
-  "message": "Invalid credentials",
-  "errors": {
-    "email": ["Email tidak terdaftar"],
-    "password": ["Password salah"]
-  }
-}</code></pre>
-    </section>
-
+    <!-- DOWNLOAD -->
     <section id="download" class="panel">
-      <h2>Download Collection</h2>
-      <p>Letakkan file <code>krusit.postman_collection.json</code> di lokasi yang sama dengan <code>index.html</code> ini. Tombol di bawah akan otomatis mengunduhnya.</p>
+      <h2>Download Postman Collection</h2>
+      <p>Gunakan salah satu opsi di bawah ini. Halaman ini mendukung <b>tiga sumber</b> collection: <code>?collection=&lt;URL-file&gt;</code>, <code>?drive_id=&lt;FILE_ID&gt;</code>, atau file lokal <code>krusit.postman_collection.json</code> di folder yang sama.</p>
       <div class="cta">
-        <a class="btn brand" href="krusit.postman_collection.json" download>⬇️ Download Postman Collection</a>
-        <a class="btn" id="openPostman2" href="#">🧰 Import langsung ke Postman</a>
+        <a class="btn brand" id="btnDownload" href="#" download>⬇️ Download</a>
+        <a class="btn" id="btnImportPostman2" href="#">🧰 Import langsung ke Postman</a>
+        <a class="btn" id="btnOpenDriveFolder" href="https://drive.google.com/drive/folders/1rgN4Qzp5NYcKVfWEGtLm98ynZMpQLoLU?usp=sharing" target="_blank">📁 Buka Folder Drive</a>
       </div>
-      <p class="muted" style="margin-top:8px">Tip: Setelah dipush ke GitHub Pages, Anda juga bisa membagikan link langsung ke file collection (raw) untuk import otomatis.</p>
-    </section>
-
-    <section id="changelog" class="panel">
-      <h2>Changelog</h2>
-      <ul>
-        <li><b>v0.1</b> — Halaman dokumentasi awal, contoh endpoint <code>/api/ping</code>, <code>/api/auth/login</code>, template menu & orders, tombol download/import Postman.</li>
-      </ul>
+      <div class="note" style="margin-top:10px">
+        <b>Cara pakai Google Drive:</b>
+        <ol>
+          <li>Upload file <code>krusit.postman_collection.json</code> ke Google Drive dan set <i>Anyone with the link</i>.</li>
+          <li>Salin link file (bukan link folder). Bentuknya biasanya <code>https://drive.google.com/file/d/&lt;FILE_ID&gt;/view?usp=sharing</code>.</li>
+          <li>Buka halaman ini dengan parameter <code>?drive_id=&lt;FILE_ID&gt;</code>. Contoh: <code>?drive_id=1AbCDeFg...</code>.</li>
+          <li>Tombol <b>Download</b> & <b>Import Postman</b> akan otomatis memakai link langsung: <code>https://drive.google.com/uc?export=download&id=&lt;FILE_ID&gt;</code>.</li>
+        </ol>
+      </div>
+      <details style="margin-top:10px">
+        <summary>Alternatif GitHub Pages</summary>
+        <p>Letakkan file <code>krusit.postman_collection.json</code> di root repo (bareng <code>index.html</code>). Tanpa parameter, tombol akan mendownload berkas lokal tersebut.</p>
+      </details>
     </section>
 
     <footer>
-      © <span id="year"></span> Krusit. Dibuat dengan ♥ untuk dokumentasi yang jelas dan cepat.
+      © <span id="year"></span> Krusit. 
     </footer>
   </div>
 
   <script>
-    const BASE_URL_DEFAULT = 'http://localhost:8000';
-    const BASE_URL = new URLSearchParams(location.search).get('base') || BASE_URL_DEFAULT;
-    document.getElementById('baseUrl').textContent = BASE_URL;
+    // ====== Konfigurasi Dinamis Collection URL ======
+    // Prioritas: ?collection=URL  →  ?drive_id=FILEID  →  /krusit.postman_collection.json
+    const qs = new URLSearchParams(location.search);
+    const BASE = 'https://krusit.up.railway.app';
+    const collectionParam = qs.get('collection');
+    const driveId = qs.get('drive_id');
+    const localPath = new URL('krusit.postman_collection.json', location.href).href; // untuk GitHub Pages (jika file disimpan bersama index.html)
 
+    function buildDriveDirect(id){
+      return `https://drive.google.com/uc?export=download&id=${id}`;
+    }
+
+    function resolveCollectionUrl(){
+      if (collectionParam) return collectionParam;
+      if (driveId) return buildDriveDirect(driveId);
+      return localPath;
+    }
+
+    function postmanImportUrl(url){
+      return 'postman://app/import?externalImport=true&url=' + encodeURIComponent(url);
+    }
+
+    const collectionUrl = resolveCollectionUrl();
+
+    // Set tombol download & import
+    const dl = document.getElementById('btnDownload');
+    dl.href = collectionUrl;
+    dl.setAttribute('download', 'krusit.postman_collection.json');
+
+    const imp = document.getElementById('btnImportPostman');
+    const imp2 = document.getElementById('btnImportPostman2');
+    imp.href = postmanImportUrl(collectionUrl);
+    imp2.href = postmanImportUrl(collectionUrl);
+
+    // Base URL copy
     document.getElementById('copyBase').addEventListener('click', async () => {
-      try{ await navigator.clipboard.writeText(BASE_URL); alert('Base URL tersalin: ' + BASE_URL);}catch(e){ console.log(e) }
+      try{ await navigator.clipboard.writeText(BASE); alert('Base URL tersalin: ' + BASE);}catch(e){ console.log(e) }
     });
 
-    // Buka Postman dengan skema import
-    function postmanImportUrl(){
-      // Jika sudah di-host di GitHub Pages, ganti origin di bawah dengan domain Pages Anda.
-      const collectionUrl = new URL('krusit.postman_collection.json', location.href).href;
-      return 'postman://app/import?externalImport=true&url=' + encodeURIComponent(collectionUrl);
-    }
-    const open1 = document.getElementById('openPostman');
-    const open2 = document.getElementById('openPostman2');
-    open1.addEventListener('click', (e)=>{ e.preventDefault(); location.href = postmanImportUrl(); });
-    open2.addEventListener('click', (e)=>{ e.preventDefault(); location.href = postmanImportUrl(); });
-
-    // Copy buttons for endpoint labels
+    // Copy kecil untuk label endpoint
     document.querySelectorAll('.copy').forEach(btn => {
       btn.addEventListener('click', async ()=>{
         const text = btn.getAttribute('data-copy');
@@ -270,7 +383,7 @@ const { data } = await api.get('/api/ping');</code></pre>
       })
     });
 
-    // Tahun footer
+    // Footer tahun
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
